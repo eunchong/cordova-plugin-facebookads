@@ -430,7 +430,7 @@ public class FacebookAdPlugin extends GenericAdPlugin {
         //         fireAdErrorEvent(EVENT_AD_FAILLOAD, arg1.getErrorCode(), arg1.getErrorMessage(), ADTYPE_BANNER);
         //     }
         // });
-        return ad;
+        return adView;
     }
 
     @Override
