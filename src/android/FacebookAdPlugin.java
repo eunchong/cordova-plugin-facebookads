@@ -380,11 +380,12 @@ public class FacebookAdPlugin extends GenericAdPlugin {
     @Override
     protected View __createAdView(String adId) {
         if(isTesting) adId = TEST_BANNER_ID;
-        AdView ad = new AdView(getActivity(), adId, adSize);
+        // AdView ad = new AdView(getActivity(), adId, adSize);
+        AdView  adView = new AdView(getActivity(), adId, adSize);
 
-        if (ad.getParent() != null) {
-            ((ViewGroup)ad.getParent()).removeView(ad);
-        }
+        // if (ad.getParent() != null) {
+        //     ((ViewGroup)ad.getParent()).removeView(ad);
+        // }
 
         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -402,31 +403,33 @@ public class FacebookAdPlugin extends GenericAdPlugin {
         }
 
         adViewLayout.addView(adView, params2);
-        adViewLayout.bringToFront();
+        // adViewLayout.bringToFront();
 
-        adView.setVisibility( View.VISIBLE );
-        bannerVisible = true;        
+        // adView.setVisibility( View.VISIBLE );
+        // bannerVisible = true;        
+
+        adView.loadAd();
 
 
-        ad.setAdListener(new AdListener(){
-            @Override
-            public void onAdClicked(Ad arg0) {
-                fireAdEvent(EVENT_AD_LEAVEAPP, ADTYPE_BANNER);
-            }
+        // ad.setAdListener(new AdListener(){
+        //     @Override
+        //     public void onAdClicked(Ad arg0) {
+        //         fireAdEvent(EVENT_AD_LEAVEAPP, ADTYPE_BANNER);
+        //     }
 
-            @Override
-            public void onAdLoaded(Ad arg0) {
-                if((! bannerVisible) && autoShowBanner) {
-                    showBanner(adPosition, posX, posY);
-                }
-                fireAdEvent(EVENT_AD_LOADED, ADTYPE_BANNER);
-            }
+        //     @Override
+        //     public void onAdLoaded(Ad arg0) {
+        //         if((! bannerVisible) && autoShowBanner) {
+        //             showBanner(adPosition, posX, posY);
+        //         }
+        //         fireAdEvent(EVENT_AD_LOADED, ADTYPE_BANNER);
+        //     }
 
-            @Override
-            public void onError(Ad arg0, AdError arg1) {
-                fireAdErrorEvent(EVENT_AD_FAILLOAD, arg1.getErrorCode(), arg1.getErrorMessage(), ADTYPE_BANNER);
-            }
-        });
+        //     @Override
+        //     public void onError(Ad arg0, AdError arg1) {
+        //         fireAdErrorEvent(EVENT_AD_FAILLOAD, arg1.getErrorCode(), arg1.getErrorMessage(), ADTYPE_BANNER);
+        //     }
+        // });
         return ad;
     }
 
